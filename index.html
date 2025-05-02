@@ -464,6 +464,8 @@
 	  document.getElementById("H3").innerHTML = "";
 
       var count = 0
+	  // 讀取選擇的每組張數（20 或 25）
+	  var perGroup = document.querySelector('input[name="PerGroup"]:checked').value;
 	  var limit = document.getElementById("GroupCount").value;
       var yElement = document.getElementById("YID");
       var mElement = document.getElementById("MID");
@@ -482,8 +484,9 @@
 		}
 		if (mElement.options[j].value == "99") { continue; }
         //if (i === 0 && j < 10) { continue; } //重11開始
-        //25天一個循環
-		for (var k = 0; k < 25; k++) {
+        
+		//根據每組張數 幾天一個循環
+		for (var k = 0; k < perGroup; k++) {
 		  //從指定天數開始執行
 		  if (chd == "N"){
 		    if (dElement.value != dElement.options[k].value) { continue; } else { chd = "Y"; }
@@ -536,28 +539,28 @@
 
 
               count += 1
-              if (count > limit*25) { break; } //1組25張
+              if (count > limit*perGroup) { break; } //根據每組張數顯示
 				
-				//紀錄條碼連結
-				urll.push("https://7rilozmxuejfz0c4totngw.on.drv.tw/website/barcode.html?id1="+S1+"&id2="+S2+"&id3="+S3);
+			  //紀錄條碼連結
+			  urll.push("https://7rilozmxuejfz0c4totngw.on.drv.tw/website/barcode.html?id1="+S1+"&id2="+S2+"&id3="+S3);
 				
-				var container = document.createElement("div");
-				container.style.styleFloat = 'left';
-				container.setAttribute("style", "padding: 15px 0px 15px 0px;margin: 0px;width: calc("+document.querySelector('[name=size]:checked').value+"% - 2px);border:1px solid black;float:left; text-align: center;");
+			  var container = document.createElement("div");
+			  container.style.styleFloat = 'left';
+			  container.setAttribute("style", "padding: 15px 0px 15px 0px;margin: 0px;width: calc("+document.querySelector('[name=size]:checked').value+"% - 2px);border:1px solid black;float:left; text-align: center;");
               
-				//條碼連結
-				var elemDiv0 = document.createElement("a");
-				elemDiv0.setAttribute("id", "href");
-				elemDiv0.setAttribute("href", "https://7rilozmxuejfz0c4totngw.on.drv.tw/website/barcode.html?id1="+S1+"&id2="+S2+"&id3="+S3);
-				elemDiv0.setAttribute("target", "_blank"); //新分頁
-				elemDiv0.appendChild(document.createTextNode("開啟條碼"));  
-				container.appendChild(elemDiv0);
-				container.appendChild(document.createElement("br"));
+			  //條碼連結
+			  var elemDiv0 = document.createElement("a");
+			  elemDiv0.setAttribute("id", "href");
+			  //elemDiv0.setAttribute("href", "https://7rilozmxuejfz0c4totngw.on.drv.tw/website/barcode.html?id1="+S1+"&id2="+S2+"&id3="+S3);
+			  elemDiv0.setAttribute("target", "_blank"); //新分頁
+			  elemDiv0.appendChild(document.createTextNode("開啟條碼(壞掉了)"));  
+			  container.appendChild(elemDiv0);
+			  container.appendChild(document.createElement("br"));
 				
-				//<a href="#" onclick="window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');">開新視窗</a>
+			  //<a href="#" onclick="window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');">開新視窗</a>
 				
-				//條碼
-				var elemDiv1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+			  //條碼
+			  var elemDiv1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
               elemDiv1.setAttribute('id', 'bar' + S1);
               var elemDiv2 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
               elemDiv2.setAttribute('id', 'bar' + S2 );
@@ -610,7 +613,7 @@
 		elemDiv888.setAttribute("type", "submit");
 		elemDiv888.setAttribute("class", "button button-blue2");
 		elemDiv888.setAttribute("id", "sb2");
-		elemDiv888.setAttribute("value", "一次開啟全部條碼連結");
+		elemDiv888.setAttribute("value", "一次開啟全部條碼連結(壞掉了)");
 		
 		document.getElementById('href999').appendChild(elemDiv888);
 
@@ -634,7 +637,7 @@
 	
 	function OPQR() {
 	  for (var i = 0; i < urll.length; i++) {
-		window.open(urll[i]); //開啟分頁
+		//window.open(urll[i]); //開啟分頁
 	  }
 	}
 
@@ -733,11 +736,18 @@
           <option value="25">25</option>
           <option value="99" id="D99" disabled="" style="display:none; ">99</option>
         </select>日<small>(必填)</small><br><br>
-		<b><font color="#000099">產生組數(1組25張)：</b><input style="width: 100px;" placeholder="預設1組25張" id='GroupCount' required="" type="text" oninput="this.value=
-            this.value.toUpperCase()" value="1"></font><br><br>
-        <b>
-          <font color="#000099">費用代碼： </font>
-        </b><input style="width: 200px;" placeholder="第一段條碼末 3 碼（英數字）" id='CodeText' name="FeeCode" maxlength="3" minlength="3" required="" type="text" oninput="this.value=
+		
+
+		<b><font color="#000099">每組張數：</font></b>
+		<label><input type="radio" name="PerGroup" value="25" checked> 25 張</label>
+		<label><input type="radio" name="PerGroup" value="20"> 20 張</label>
+		<br>
+		<b><font color="#000099">產生組數：</b>
+		<input style="width: 100px;" placeholder="預設1組" id='GroupCount' required="" type="text" oninput="this.value=this.value.toUpperCase()" value="1">
+		</font><br><br>
+        
+		<b><font color="#000099">費用代碼： </font></b>
+		<input style="width: 200px;" placeholder="第一段條碼末 3 碼（英數字）" id='CodeText' name="FeeCode" maxlength="3" minlength="3" required="" type="text" oninput="this.value=
             this.value.toUpperCase()"> <small>(必填)</small>
 			<button id="addCode" onclick="insCode()" type="button">新增</button><select id="Codes"></select><button id="delCode" onclick="rmCode()" type="button">刪除</button><br><br>
         <b>
