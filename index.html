@@ -553,9 +553,16 @@
 			  //elemDiv0.setAttribute("id", "href");
 			  //elemDiv0.setAttribute("href", "https://7rilozmxuejfz0c4totngw.on.drv.tw/website/barcode.html?id1="+S1+"&id2="+S2+"&id3="+S3);
 			  //elemDiv0.setAttribute("target", "_blank"); //新分頁
-			  //elemDiv0.appendChild(document.createTextNode("開啟條碼(壞掉了)")); 
-		          elemDiv0.appendChild(document.createTextNode(count+"/"+perGroup));  //目前張數perGroup
+			  //elemDiv0.appendChild(document.createTextNode("開啟條碼(壞掉了)"));
+		          elemDiv0.style.fontSize = "24px";
+		          bigCount.textContent = count;
+		          
+		          var elemDiv01 = document.createElement("span");
+		          elemDiv01.textContent = "/" + perGroup;
+		    
+		          //elemDiv0.appendChild(document.createTextNode(count+"/"+perGroup));  //目前張數perGroup
 			  container.appendChild(elemDiv0);
+		          container.appendChild(elemDiv01);
 			  container.appendChild(document.createElement("br"));
 				
 			  //<a href="#" onclick="window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');">開新視窗</a>
