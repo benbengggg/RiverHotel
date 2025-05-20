@@ -549,11 +549,12 @@
 			  container.setAttribute("style", "padding: 15px 0px 15px 0px;margin: 0px;width: calc("+document.querySelector('[name=size]:checked').value+"% - 2px);border:1px solid black;float:left; text-align: center;");
               
 			  //條碼連結
-			  var elemDiv0 = document.createElement("a");
-			  elemDiv0.setAttribute("id", "href");
+			  var elemDiv0 = document.createElement("b");
+			  //elemDiv0.setAttribute("id", "href");
 			  //elemDiv0.setAttribute("href", "https://7rilozmxuejfz0c4totngw.on.drv.tw/website/barcode.html?id1="+S1+"&id2="+S2+"&id3="+S3);
-			  elemDiv0.setAttribute("target", "_blank"); //新分頁
-			  elemDiv0.appendChild(document.createTextNode("開啟條碼(壞掉了)"));  
+			  //elemDiv0.setAttribute("target", "_blank"); //新分頁
+			  //elemDiv0.appendChild(document.createTextNode("開啟條碼(壞掉了)")); 
+		          elemDiv0.appendChild(document.createTextNode(count+"/"+perGroup));  //目前張數perGroup
 			  container.appendChild(elemDiv0);
 			  container.appendChild(document.createElement("br"));
 				
@@ -561,11 +562,11 @@
 				
 			  //條碼
 			  var elemDiv1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-              elemDiv1.setAttribute('id', 'bar' + S1);
-              var elemDiv2 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-              elemDiv2.setAttribute('id', 'bar' + S2 );
-              var elemDiv3 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-              elemDiv3.setAttribute('id', 'bar' + S3 );
+                          elemDiv1.setAttribute('id', 'bar' + S1);
+                          var elemDiv2 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                          elemDiv2.setAttribute('id', 'bar' + S2 );
+                          var elemDiv3 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                          elemDiv3.setAttribute('id', 'bar' + S3 );
 			  container.appendChild(elemDiv1);
 			  container.appendChild(document.createElement("br"));
 			  container.appendChild(elemDiv2);
