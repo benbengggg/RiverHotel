@@ -507,7 +507,6 @@
 		  if (mElement.value != mElement.options[j].value) { continue; } else { chm = "Y"; }
 		}
 		if (mElement.options[j].value == "99") { continue; }
-        //if (i === 0 && j < 10) { continue; } //重11開始
         
 		//根據每組張數 幾天一個循環
 		for (var k = 0; k < perGroup; k++) {
@@ -516,14 +515,15 @@
 		    if (dElement.value != dElement.options[k].value) { continue; } else { chd = "Y"; }
 		  }
 		  if (dElement.options[k].value == "99") { continue; }
-          Exp = yElement.value + mElement.options[j].value + dElement.options[k].value;
-          for (var l = 0; l < AccNos.length; l++) {
+          
+		  Exp = yElement.value + mElement.options[j].value + dElement.options[k].value;
+          
+		  for (var l = 0; l < AccNos.length; l++) {
 
             var S1 = Exp + Codes[l].value
             var S2 = AccNos[l].value.padEnd(16, '0');
             var YM = document.searchbox.Prefix.value.padEnd(4, '0');
             var VA = ("000000000" + document.searchbox.Amount.value).substr(-9, 9);
-
 
             document.getElementById('instructions').style.display = "none";
 
@@ -560,7 +560,6 @@
               var L1 = "https://chart.googleapis.com/chart?cht=qr&chs=180x180&chl=" + S1;
               var L2 = "https://chart.googleapis.com/chart?cht=qr&chs=180x180&chl=" + S2;
               var L3 = "https://chart.googleapis.com/chart?cht=qr&chs=180x180&chl=" + S3;
-
 
               count += 1
               if (count > limit*perGroup) { break; } //根據每組張數顯示
@@ -771,10 +770,9 @@
 		
 
 		<b><font color="#000099">每組張數：</font></b>
-		<label><input type="radio" name="PerGroup" value="20" checked> 20 張</label>
+		<label><input type="radio" name="PerGroup" value="15" checked> 15 張</label>
+		<label><input type="radio" name="PerGroup" value="20"> 20 張</label>
 		<label><input type="radio" name="PerGroup" value="25"> 25 張</label>
-		<label><input type="radio" name="PerGroup" value="30"> 30 張</label>
-		<label><input type="radio" name="PerGroup" value="50"> 50 張</label>
 		<br>
 		<b><font color="#000099">產生組數：</b>
 		<input style="width: 100px;" placeholder="預設1組" id='GroupCount' required="" type="text" oninput="this.value=this.value.toUpperCase()" value="1">
